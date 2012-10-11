@@ -6,6 +6,8 @@
 			<pattern>%d %5p %40.40c:%4L - %m%n</pattern>
 		</encoder>
 	</appender>
+	
+	<logger name="org.springframework.orm" level="debug" />
 
 	<root level="info">
 		<appender-ref ref="console" />
