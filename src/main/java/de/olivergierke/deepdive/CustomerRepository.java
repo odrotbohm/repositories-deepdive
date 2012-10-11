@@ -15,6 +15,7 @@
  */
 package de.olivergierke.deepdive;
 
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.Repository;
 
 /**
@@ -23,25 +24,7 @@ import org.springframework.data.repository.Repository;
  * @author Oliver Gierke
  * @since Step 2
  */
-public interface CustomerRepository extends Repository<Customer, Long> {
-
-	/**
-	 * Returns the {@link Customer} with the given identifier.
-	 * 
-	 * @param id the id to search for.
-	 * @since Step 2
-	 * @return
-	 */
-	Customer findOne(Long id);
-
-	/**
-	 * Saves the given {@link Customer}.
-	 * 
-	 * @param customer the {@link Customer} to search for.
-	 * @since Step 2
-	 * @return
-	 */
-	Customer save(Customer customer);
+public interface CustomerRepository extends CrudRepository<Customer, Long> {
 
 	/**
 	 * Returns the customer with the given {@link EmailAddress}.
