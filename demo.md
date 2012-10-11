@@ -66,7 +66,16 @@ __Objective:__ Explain possibilities to define custom repository base interfaces
   - Fix ID type to `Long`
 - Introduce `ProductRepository extends ReadOnlyRepository<Product>`
 
-# Step 7 - Flexible predicate exection
+# Step 7 - Using manually defined queries
+
+__Objective:__ Learn how to manually define a query using the `@Query` annotation or named queries
+
+> As a user, I want to look up products by their custom attributes
+
+- Introduce the `@Query` annotation
+- Mention `jpa-named-queries.properties`
+
+# Step 8 - Flexible predicate execution
 
 __Objective:__ Learn how to define atomic business predicates and execute them in flexible ways.
 
@@ -75,5 +84,14 @@ __Objective:__ Learn how to define atomic business predicates and execute them i
 - Introduce Querydsl
   - Add Querydsl dependency and set up APT as well as IDE
   - Show generated query classes
-  - Add `QuerydslpredicateExecutor`
+  - Add `QuerydslPredicateExecutor`
   - Show usage in test case
+  
+# Step 9 - Custom implementation for  repositories
+
+__Objective:__ Lear how to extend a repository with manually implemented code.
+
+> As an admin user, I'd like to delete all products beyond a given price.
+
+- Add `ProductRepositoryCustom` to declare custom method
+- Add custom implementation extending `QueryDslRepositorySupport`
