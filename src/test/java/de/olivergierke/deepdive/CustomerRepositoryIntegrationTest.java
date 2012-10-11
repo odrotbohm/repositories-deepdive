@@ -21,6 +21,8 @@ import static org.junit.Assert.*;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 
 import de.olivergierke.deepdive.CustomerRepository;
 
@@ -112,5 +114,19 @@ public class CustomerRepositoryIntegrationTest extends AbstractIntegrationTest {
 
 		repository.delete(1L);
 		assertThat(repository.findOne(1L), is(nullValue()));
+	}
+
+	/**
+	 * @since Step 4.1
+	 */
+	@Test
+	public void accessesCustomersPageByPage() {
+
+		Page<Customer> result = repository.findAll(new PageRequest(1, 1));
+
+		assertThat(result, is(notNullValue()));
+		assertThat(result.isFirstPage(), is(false));
+		assertThat(result.isLastPage(), is(false));
+		assertThat(result.getNumberOfElements(), is(1));
 	}
 }
