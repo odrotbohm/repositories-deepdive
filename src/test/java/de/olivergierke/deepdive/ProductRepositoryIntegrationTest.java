@@ -18,6 +18,7 @@ package de.olivergierke.deepdive;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.hamcrest.Matchers;
@@ -70,5 +71,19 @@ public class ProductRepositoryIntegrationTest extends AbstractIntegrationTest {
 		List<Product> products = repository.findByAttributeAndValue("connector", "plug");
 
 		assertThat(products, Matchers.<Product> hasItem(hasProperty("name", is("Dock"))));
+	}
+
+	/**
+	 * @since Step 9
+	 */
+	@Test
+	public void executesCustomlyImplementedMethod() {
+
+		repository.removeProductsMoreExpensiveThan(new BigDecimal(500));
+
+		List<Product> result = repository.findAll();
+
+		assertThat(result, hasSize(2));
+		assertThat(result, not(Matchers.<Product> hasItem(hasProperty("name", is("Mac Book Pro")))));
 	}
 }
