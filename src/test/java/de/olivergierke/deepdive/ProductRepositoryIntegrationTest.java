@@ -60,4 +60,15 @@ public class ProductRepositoryIntegrationTest extends AbstractIntegrationTest {
 		assertThat(products, Matchers.<Product> hasItem(hasProperty("name", is("iPad"))));
 		assertThat(products, not(Matchers.<Product> hasItem(hasProperty("name", is("Dock")))));
 	}
+
+	/**
+	 * @since Step 7
+	 */
+	@Test
+	public void executesManuallyDeclaredQuery() {
+
+		List<Product> products = repository.findByAttributeAndValue("connector", "plug");
+
+		assertThat(products, Matchers.<Product> hasItem(hasProperty("name", is("Dock"))));
+	}
 }
