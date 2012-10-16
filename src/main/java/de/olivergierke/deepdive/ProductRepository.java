@@ -26,7 +26,7 @@ import org.springframework.data.jpa.repository.Query;
  * 
  * @author Oliver Gierke
  */
-public interface ProductRepository extends ReadOnlyRepository<Product> {
+public interface ProductRepository extends ReadOnlyRepository<Product>, ProductRepositoryCustom {
 
 	/**
 	 * Returns a {@link Page} of {@link Product}s having a description which contains the given snippet.
