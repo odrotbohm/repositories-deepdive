@@ -18,8 +18,6 @@ package de.olivergierke.deepdive;
 import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import de.olivergierke.deepdive.ApplicationConfig;
-
 /**
  * Sample test case bootstrapping the application.
  * 
