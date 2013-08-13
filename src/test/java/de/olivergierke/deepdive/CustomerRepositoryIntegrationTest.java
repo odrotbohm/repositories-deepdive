@@ -18,7 +18,8 @@ package de.olivergierke.deepdive;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
-import org.hamcrest.Matchers;
+import java.util.List;
+
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -102,8 +103,8 @@ public class CustomerRepositoryIntegrationTest extends AbstractIntegrationTest {
 	@Test
 	public void findsAllCustomers() {
 
-		Iterable<Customer> customers = repository.findAll();
-		assertThat(customers, is(Matchers.<Customer> iterableWithSize(3)));
+		List<Customer> customers = repository.findAll();
+		assertThat(customers, hasSize(3));
 	}
 
 	/**
