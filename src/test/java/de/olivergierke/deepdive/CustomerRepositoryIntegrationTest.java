@@ -20,12 +20,13 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
+import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
-import de.olivergierke.deepdive.CustomerRepository;
+import com.mysema.query.types.expr.BooleanExpression;
 
 /**
  * Integration tests for {@link CustomerRepository}.
@@ -129,5 +130,25 @@ public class CustomerRepositoryIntegrationTest extends AbstractIntegrationTest {
 		assertThat(result.isFirstPage(), is(false));
 		assertThat(result.isLastPage(), is(false));
 		assertThat(result.getNumberOfElements(), is(1));
+	}
+
+	/**
+	 * @since Step 8
+	 */
+	@Test
+	public void executesQuerydslPredicate() {
+
+		Customer dave = repository.findByEmailAddress(new EmailAddress("dave@dmband.com"));
+		Customer carter = repository.findByEmailAddress(new EmailAddress("carter@dmband.com"));
+
+		QCustomer customer = QCustomer.customer;
+
+		BooleanExpression firstnameStartsWithDa = customer.firstname.startsWith("Da");
+		BooleanExpression lastnameContainsEau = customer.lastname.contains("eau");
+
+		Iterable<Customer> result = repository.findAll(firstnameStartsWithDa.or(lastnameContainsEau));
+
+		assertThat(result, is(Matchers.<Customer> iterableWithSize(2)));
+		assertThat(result, hasItems(dave, carter));
 	}
 }

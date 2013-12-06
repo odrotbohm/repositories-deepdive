@@ -15,6 +15,7 @@
 	
 	<properties>
 		<spring-data-jpa.version>1.4.2.RELEASE</spring-data-jpa.version>
+		<querydsl.version>3.2.4</querydsl.version>
 	</properties>
 
 	<dependencies>
@@ -36,7 +37,45 @@
 			<scope>runtime</scope>
 		</dependency>
 		
-		</dependencies>
+		<dependency>
+			<groupId>com.mysema.querydsl</groupId>
+			<artifactId>querydsl-jpa</artifactId>
+			<version>${querydsl.version}</version>
+		</dependency>
+
+	</dependencies>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>com.mysema.maven</groupId>
+				<artifactId>apt-maven-plugin</artifactId>
+				<version>1.1.0</version>
+				<configuration>
+					<processor>com.mysema.query.apt.jpa.JPAAnnotationProcessor</processor>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>com.mysema.querydsl</groupId>
+						<artifactId>querydsl-apt</artifactId>
+						<version>${querydsl.version}</version>
+					</dependency>
+				</dependencies>
+
+				<executions>
+					<execution>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>process</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>target/generated-sources</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 
 	<repositories>
 		<repository>
