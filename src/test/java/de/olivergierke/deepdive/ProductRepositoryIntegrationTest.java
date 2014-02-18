@@ -70,4 +70,15 @@ public class ProductRepositoryIntegrationTest extends AbstractIntegrationTest {
 		Optional<Product> result = repository.findOne(4711L);
 		assertThat(result, is(Optional.empty()));
 	}
+	
+	/**
+	 * @since Step 7
+	 */
+	@Test
+	public void executesManuallyDeclaredQuery() {
+
+		List<Product> products = repository.findByAttributeAndValue("connector", "plug");
+
+		assertThat(products, Matchers.<Product> hasItem(hasProperty("name", is("Dock"))));
+	}
 }
