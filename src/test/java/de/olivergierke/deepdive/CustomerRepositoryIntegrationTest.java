@@ -18,6 +18,7 @@ package de.olivergierke.deepdive;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
+import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -88,5 +89,25 @@ public class CustomerRepositoryIntegrationTest extends AbstractIntegrationTest {
 		assertThat(result, is(notNullValue()));
 		assertThat(result.getFirstname(), is("Dave"));
 		assertThat(result.getLastname(), is("Matthews"));
+	}
+
+	/**
+	 * @since Step 3.1
+	 */
+	@Test
+	public void findsAllCustomers() {
+
+		Iterable<Customer> customers = repository.findAll();
+		assertThat(customers, is(Matchers.<Customer> iterableWithSize(3)));
+	}
+
+	/**
+	 * @since Step 3.2
+	 */
+	@Test
+	public void deletesCustomer() {
+
+		repository.delete(1L);
+		assertThat(repository.findOne(1L), is(nullValue()));
 	}
 }
