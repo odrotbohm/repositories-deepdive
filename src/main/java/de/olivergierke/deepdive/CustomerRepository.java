@@ -17,6 +17,7 @@ package de.olivergierke.deepdive;
 
 import java.util.List;
 
+import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,7 +28,8 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Oliver Gierke
  * @since Step 2
  */
-public interface CustomerRepository extends PagingAndSortingRepository<Customer, Long> {
+public interface CustomerRepository extends PagingAndSortingRepository<Customer, Long>,
+		QueryDslPredicateExecutor<Customer> {
 
 	/*
 	 * (non-Javadoc)
